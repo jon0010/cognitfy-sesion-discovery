@@ -358,3 +358,114 @@
 .wf-edge-dash-fast {
   animation: wf-edge-dash 0.45s linear infinite;
 }
+
+/* Núcleo: androide — base compartida */
+.core-android-figure {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.core-android-hero {
+  height: 132%;
+  -webkit-mask-image: linear-gradient(to top, transparent 0%, black 14%);
+  mask-image: linear-gradient(to top, transparent 0%, black 14%);
+}
+
+.core-android-fade-right {
+  position: absolute;
+  inset-block: 0;
+  right: 0;
+  z-index: 10;
+  width: 28%;
+  background: linear-gradient(
+    to left,
+    var(--background) 0%,
+    color-mix(in oklch, var(--background) 82%, transparent) 42%,
+    transparent 100%
+  );
+}
+
+.core-android-fade-bottom {
+  position: absolute;
+  inset-inline: 0;
+  bottom: -1px;
+  z-index: 10;
+  height: 32%;
+  min-height: 110px;
+  background: linear-gradient(
+    to top,
+    oklch(0.08 0.01 260) 0%,
+    oklch(0.08 0.01 260) 40%,
+    oklch(0.08 0.01 260 / 0.94) 58%,
+    oklch(0.08 0.01 260 / 0.55) 78%,
+    transparent 100%
+  );
+}
+
+.core-android-fade-bottom::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 4px;
+  background: oklch(0.08 0.01 260);
+}
+
+.core-nucleo-layout {
+  min-height: 60vh;
+}
+
+.core-nucleo-grid {
+  position: relative;
+}
+
+.core-nucleo-content {
+  width: 100%;
+}
+
+.core-nucleo-content .core-agent-card > div:last-child {
+  background: oklch(0.12 0.01 260 / 0.95);
+}
+
+.core-nucleo-grid .core-android-aside {
+  position: relative;
+  z-index: 0;
+  align-self: stretch;
+  width: 100%;
+  min-height: 0;
+}
+
+.core-nucleo-grid .core-android-sticky {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+@media (min-width: 1024px) {
+  .core-nucleo-grid .core-android-aside {
+    margin-right: calc(50% - 50vw);
+  }
+
+  .core-nucleo-grid .core-android-sticky {
+    position: sticky;
+    top: 5.5rem;
+    height: calc(100dvh - 5.5rem);
+    max-height: 1180px;
+    padding-bottom: 5vh;
+  }
+
+  .core-android-stage--sticky {
+    height: min(100dvh, 1180px);
+    min-height: 620px;
+    overflow: visible;
+  }
+
+  .core-android-stage--sticky .core-android-figure {
+    transform: translate(38%, calc(14% + 60px));
+  }
+}
+
