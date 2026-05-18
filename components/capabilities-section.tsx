@@ -1,24 +1,24 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { useEffect, useRef, useState } from "react"
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { 
-  Mail, 
-  Database, 
-  Search, 
-  LayoutDashboard, 
-  Bot, 
-  FileText, 
-  Globe, 
-  Network, 
-  Shield, 
-  Zap 
-} from "lucide-react"
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import {
+  Mail,
+  Database,
+  Search,
+  LayoutDashboard,
+  Bot,
+  FileText,
+  Globe,
+  Network,
+  Shield,
+  Zap,
+} from "lucide-react";
 
 if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger)
+  gsap.registerPlugin(ScrollTrigger);
 }
 
 const features = [
@@ -46,7 +46,7 @@ const features = [
     description:
       "Qué se ejecutó, cuándo y con qué resultado. El responsable ve el impacto sin depender de reuniones eternas para enterarse.",
   },
-]
+];
 
 const capabilities = [
   {
@@ -85,15 +85,15 @@ const capabilities = [
     description:
       "Implementación llave en mano en días o pocas semanas, sin pedir al cliente que aprenda a programar.",
   },
-]
+];
 
 export function CapabilitiesSection() {
-  const sectionRef = useRef<HTMLElement>(null)
-  const headerRef = useRef<HTMLDivElement>(null)
-  const featuresRef = useRef<HTMLDivElement>(null)
-  const dividerRef = useRef<HTMLDivElement>(null)
-  const capabilitiesRef = useRef<HTMLDivElement>(null)
-  const [hoveredFeature, setHoveredFeature] = useState<number | null>(null)
+  const sectionRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const featuresRef = useRef<HTMLDivElement>(null);
+  const dividerRef = useRef<HTMLDivElement>(null);
+  const capabilitiesRef = useRef<HTMLDivElement>(null);
+  const [hoveredFeature, setHoveredFeature] = useState<number | null>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -102,40 +102,47 @@ export function CapabilitiesSection() {
         scrollTrigger: {
           trigger: headerRef.current,
           start: "top 80%",
-          toggleActions: "play none none none"
-        }
-      })
+          toggleActions: "play none none none",
+        },
+      });
 
       headerTl
         .fromTo(
           headerRef.current?.querySelector(".section-label"),
           { opacity: 0, y: 20, scaleX: 0.5 },
-          { opacity: 1, y: 0, scaleX: 1, duration: 0.6, ease: "power3.out" }
+          { opacity: 1, y: 0, scaleX: 1, duration: 0.6, ease: "power3.out" },
         )
         .fromTo(
           headerRef.current?.querySelector("h2"),
           { opacity: 0, y: 40, clipPath: "inset(100% 0% 0% 0%)" },
-          { opacity: 1, y: 0, clipPath: "inset(0% 0% 0% 0%)", duration: 0.8, ease: "power4.out" },
-          "-=0.3"
+          {
+            opacity: 1,
+            y: 0,
+            clipPath: "inset(0% 0% 0% 0%)",
+            duration: 0.8,
+            ease: "power4.out",
+          },
+          "-=0.3",
         )
         .fromTo(
           headerRef.current?.querySelector("p"),
           { opacity: 0, y: 30 },
           { opacity: 1, y: 0, duration: 0.6 },
-          "-=0.4"
-        )
+          "-=0.4",
+        );
 
       // Features staggered animation with 3D effect
       if (featuresRef.current) {
-        const featureCards = featuresRef.current.querySelectorAll(".feature-card")
-        
+        const featureCards =
+          featuresRef.current.querySelectorAll(".feature-card");
+
         gsap.fromTo(
           featureCards,
-          { 
-            opacity: 0, 
-            y: 80, 
+          {
+            opacity: 0,
+            y: 80,
             rotateY: -15,
-            transformOrigin: "left center"
+            transformOrigin: "left center",
           },
           {
             opacity: 1,
@@ -146,14 +153,14 @@ export function CapabilitiesSection() {
             ease: "power3.out",
             scrollTrigger: {
               trigger: featuresRef.current,
-              start: "top 80%"
-            }
-          }
-        )
+              start: "top 80%",
+            },
+          },
+        );
 
         // Icon bounce on scroll
         featureCards.forEach((card) => {
-          const icon = card.querySelector(".feature-icon")
+          const icon = card.querySelector(".feature-icon");
           gsap.fromTo(
             icon,
             { scale: 0, rotation: -180 },
@@ -164,20 +171,20 @@ export function CapabilitiesSection() {
               ease: "back.out(1.7)",
               scrollTrigger: {
                 trigger: card,
-                start: "top 85%"
-              }
-            }
-          )
-        })
+                start: "top 85%",
+              },
+            },
+          );
+        });
       }
 
       // Divider animation
       gsap.fromTo(
         dividerRef.current,
-        { 
-          opacity: 0, 
+        {
+          opacity: 0,
           scale: 0.9,
-          y: 40
+          y: 40,
         },
         {
           opacity: 1,
@@ -187,10 +194,10 @@ export function CapabilitiesSection() {
           ease: "power3.out",
           scrollTrigger: {
             trigger: dividerRef.current,
-            start: "top 85%"
-          }
-        }
-      )
+            start: "top 85%",
+          },
+        },
+      );
 
       // Divider inner glow animation
       gsap.to(dividerRef.current?.querySelector(".divider-glow"), {
@@ -199,19 +206,20 @@ export function CapabilitiesSection() {
         duration: 2,
         repeat: -1,
         yoyo: true,
-        ease: "sine.inOut"
-      })
+        ease: "sine.inOut",
+      });
 
       // Capabilities grid animation
       if (capabilitiesRef.current) {
-        const capCards = capabilitiesRef.current.querySelectorAll(".capability-card")
-        
+        const capCards =
+          capabilitiesRef.current.querySelectorAll(".capability-card");
+
         gsap.fromTo(
           capCards,
-          { 
-            opacity: 0, 
+          {
+            opacity: 0,
             y: 60,
-            scale: 0.9
+            scale: 0.9,
           },
           {
             opacity: 1,
@@ -221,50 +229,56 @@ export function CapabilitiesSection() {
             stagger: {
               amount: 0.8,
               grid: [2, 3],
-              from: "start"
+              from: "start",
             },
             ease: "power3.out",
             scrollTrigger: {
               trigger: capabilitiesRef.current,
-              start: "top 80%"
-            }
-          }
-        )
+              start: "top 80%",
+            },
+          },
+        );
       }
+    }, sectionRef);
 
-    }, sectionRef)
-
-    return () => ctx.revert()
-  }, [])
+    return () => ctx.revert();
+  }, []);
 
   // Magnetic hover effect for feature cards
-  const handleFeatureHover = (index: number, e: React.MouseEvent<HTMLDivElement>) => {
-    setHoveredFeature(index)
-    const card = e.currentTarget
-    const rect = card.getBoundingClientRect()
-    const x = e.clientX - rect.left - rect.width / 2
-    const y = e.clientY - rect.top - rect.height / 2
+  const handleFeatureHover = (
+    index: number,
+    e: React.MouseEvent<HTMLDivElement>,
+  ) => {
+    setHoveredFeature(index);
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
 
     gsap.to(card, {
       rotateY: x * 0.02,
       rotateX: -y * 0.02,
       duration: 0.3,
-      ease: "power2.out"
-    })
-  }
+      ease: "power2.out",
+    });
+  };
 
   const handleFeatureLeave = (e: React.MouseEvent<HTMLDivElement>) => {
-    setHoveredFeature(null)
+    setHoveredFeature(null);
     gsap.to(e.currentTarget, {
       rotateY: 0,
       rotateX: 0,
       duration: 0.5,
-      ease: "elastic.out(1, 0.5)"
-    })
-  }
+      ease: "elastic.out(1, 0.5)",
+    });
+  };
 
   return (
-    <section ref={sectionRef} id="capacidades" className="relative py-24 sm:py-32">
+    <section
+      ref={sectionRef}
+      id="capacidades"
+      className="relative py-24 sm:py-32"
+    >
       {/* Background glow */}
       <div className="absolute left-0 top-1/2 -translate-y-1/2">
         <div className="h-[400px] w-[400px] rounded-full bg-accent/10 blur-[120px]" />
@@ -280,15 +294,19 @@ export function CapabilitiesSection() {
             <span className="text-balance">No es un chatbot: es ejecución</span>
           </h2>
           <p className="mx-auto mt-4 max-w-3xl text-balance text-lg text-muted-foreground">
-            Cognitfy entiende contexto y hace ejecuta procesos de valor: crea tareas, envía
-            comunicaciones y avanza procesos. El cliente recupera tiempo para
-            vender, cobrar y decidir; el interlocutor comercial tiene un
-            relato claro y verificable.
+            Cognitfy entiende contexto y hace ejecuta procesos de valor: crea
+            tareas, envía comunicaciones y avanza procesos. El cliente recupera
+            tiempo para vender, cobrar y decidir; el interlocutor comercial
+            tiene un relato claro y verificable.
           </p>
         </div>
 
         {/* Main Features Grid */}
-        <div ref={featuresRef} className="mt-16 grid gap-6 sm:grid-cols-2" style={{ perspective: "1000px" }}>
+        <div
+          ref={featuresRef}
+          className="mt-16 grid gap-6 sm:grid-cols-2"
+          style={{ perspective: "1000px" }}
+        >
           {features.map((feature, index) => (
             <div
               key={index}
@@ -303,20 +321,23 @@ export function CapabilitiesSection() {
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold">{feature.title}</h3>
-                  <p className="mt-2 text-muted-foreground">{feature.description}</p>
+                  <p className="mt-2 text-muted-foreground">
+                    {feature.description}
+                  </p>
                 </div>
               </div>
-              
+
               {/* Animated hover gradient */}
-              <div 
+              <div
                 className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                 style={{
-                  background: hoveredFeature === index 
-                    ? "radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0,245,255,0.1), transparent 50%)"
-                    : "none"
+                  background:
+                    hoveredFeature === index
+                      ? "radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0,245,255,0.1), transparent 50%)"
+                      : "none",
                 }}
               />
-              
+
               {/* Corner glow */}
               <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-primary/5 opacity-0 blur-2xl transition-all duration-500 group-hover:opacity-100 group-hover:scale-150" />
             </div>
@@ -328,21 +349,24 @@ export function CapabilitiesSection() {
           <div className="relative mx-auto max-w-4xl overflow-hidden rounded-2xl border border-primary/20 bg-primary/5 p-8 text-center">
             {/* Animated glow background */}
             <div className="divider-glow absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent" />
-            
+
             <h3 className="relative z-10 text-2xl font-bold sm:text-3xl">
-              Un mismo producto, muchos sectores
+              Una solución para cada necesidad
             </h3>
             <p className="relative z-10 mt-4 text-muted-foreground">
               El valor no está en una “caja” cerrada: está en cómo se conecta la
               operación real del cliente — administraciones, despachos,
-              comercio, servicios, logística… La propuesta comercial es
-              siempre: menos carga interna, más continuidad y más margen.
+              comercio, servicios, logística… La propuesta comercial es siempre:
+              menos carga interna, más continuidad y más margen.
             </p>
           </div>
         </div>
 
         {/* Capabilities Grid */}
-        <div ref={capabilitiesRef} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div
+          ref={capabilitiesRef}
+          className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+        >
           {capabilities.map((capability, index) => (
             <div
               key={index}
@@ -352,7 +376,9 @@ export function CapabilitiesSection() {
                 <capability.icon className="h-5 w-5 text-accent transition-all duration-300 group-hover:scale-110" />
               </div>
               <h3 className="font-semibold">{capability.title}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{capability.description}</p>
+              <p className="mt-2 text-sm text-muted-foreground">
+                {capability.description}
+              </p>
             </div>
           ))}
         </div>
@@ -368,5 +394,5 @@ export function CapabilitiesSection() {
         </p>
       </div>
     </section>
-  )
+  );
 }

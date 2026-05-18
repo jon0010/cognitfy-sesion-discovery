@@ -126,11 +126,7 @@ export function ProblemSection() {
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      id="problema"
-      className="relative py-24 sm:py-32"
-    >
+    <section ref={sectionRef} id="reto" className="relative py-24 sm:py-32">
       <div className="absolute inset-0 grid-pattern opacity-30" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -144,7 +140,7 @@ export function ProblemSection() {
             </span>
           </h2>
           <p className="mx-auto mt-4 max-w-4xl text-balance text-lg text-muted-foreground">
-            Tenemos actualmente dos problemas: falta de digitalización y trabajo
+            Tenemos actualmente dos retos: falta de digitalización y trabajo
             real que hoy consume horas y que podría ejecutarse solo, con reglas
             claras y conexión a los sistemas con las que trabajan a diario.
           </p>

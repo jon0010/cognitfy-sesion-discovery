@@ -1,86 +1,86 @@
-"use client"
+"use client";
 
-import { useState, useEffect, useRef } from "react"
-import Image from "next/image"
-import Link from "next/link"
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger)
+  gsap.registerPlugin(ScrollTrigger);
 }
 
 const navLinks = [
-  { href: "#problema", label: "El Problema" },
+  { href: "#reto", label: "El Reto" },
   { href: "#capacidades", label: "Capacidades" },
   { href: "#integraciones", label: "Integraciones" },
   { href: "/flujo", label: "Pizarra" },
   { href: "#paquetes", label: "Paquetes" },
   { href: "#descubrimiento", label: "Sesión Estratégica" },
-]
+];
 
 export function Navbar() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
-  const navRef = useRef<HTMLElement>(null)
-  const logoRef = useRef<HTMLAnchorElement>(null)
-  const linksRef = useRef<HTMLDivElement>(null)
+  const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const navRef = useRef<HTMLElement>(null);
+  const logoRef = useRef<HTMLAnchorElement>(null);
+  const linksRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Initial animation
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } })
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
       tl.fromTo(
         logoRef.current,
         { opacity: 0, x: -20 },
-        { opacity: 1, x: 0, duration: 0.6 }
-      )
+        { opacity: 1, x: 0, duration: 0.6 },
+      );
 
       if (linksRef.current) {
-        const links = linksRef.current.querySelectorAll("a")
+        const links = linksRef.current.querySelectorAll("a");
         tl.fromTo(
           links,
           { opacity: 0, y: -10 },
           { opacity: 1, y: 0, duration: 0.4, stagger: 0.05 },
-          "-=0.3"
-        )
+          "-=0.3",
+        );
       }
-    }, navRef)
+    }, navRef);
 
     // Scroll handler
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
+      setIsScrolled(window.scrollY > 50);
+    };
 
-    window.addEventListener("scroll", handleScroll)
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      ctx.revert()
-      window.removeEventListener("scroll", handleScroll)
-    }
-  }, [])
+      ctx.revert();
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   // Link hover animation
   const handleLinkHover = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    const link = e.currentTarget
+    const link = e.currentTarget;
     gsap.to(link, {
       y: -2,
       color: "var(--foreground)",
       duration: 0.2,
-      ease: "power2.out"
-    })
-  }
+      ease: "power2.out",
+    });
+  };
 
   const handleLinkLeave = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    const link = e.currentTarget
+    const link = e.currentTarget;
     gsap.to(link, {
       y: 0,
       color: "var(--muted-foreground)",
       duration: 0.2,
-      ease: "power2.out"
-    })
-  }
+      ease: "power2.out",
+    });
+  };
 
   // Mobile menu animation
   useEffect(() => {
@@ -88,17 +88,17 @@ export function Navbar() {
       gsap.fromTo(
         ".mobile-link",
         { opacity: 0, x: -20 },
-        { opacity: 1, x: 0, duration: 0.3, stagger: 0.05, ease: "power2.out" }
-      )
+        { opacity: 1, x: 0, duration: 0.3, stagger: 0.05, ease: "power2.out" },
+      );
     }
-  }, [isOpen])
+  }, [isOpen]);
 
   return (
     <nav
       ref={navRef}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? "border-b border-border/50 bg-background/95 backdrop-blur-xl shadow-lg shadow-black/10" 
+        isScrolled
+          ? "border-b border-border/50 bg-background/95 backdrop-blur-xl shadow-lg shadow-black/10"
           : "border-b border-transparent bg-transparent"
       }`}
     >
@@ -124,7 +124,10 @@ export function Navbar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div ref={linksRef} className="hidden items-center gap-8 md:ml-auto md:flex">
+          <div
+            ref={linksRef}
+            className="hidden items-center gap-8 md:ml-auto md:flex"
+          >
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -147,17 +150,17 @@ export function Navbar() {
             aria-label="Toggle menu"
           >
             <div className="relative h-6 w-6">
-              <span 
+              <span
                 className={`absolute left-0 block h-0.5 w-6 bg-foreground transition-all duration-300 ${
                   isOpen ? "top-3 rotate-45" : "top-1"
                 }`}
               />
-              <span 
+              <span
                 className={`absolute left-0 top-3 block h-0.5 w-6 bg-foreground transition-all duration-300 ${
                   isOpen ? "opacity-0" : "opacity-100"
                 }`}
               />
-              <span 
+              <span
                 className={`absolute left-0 block h-0.5 w-6 bg-foreground transition-all duration-300 ${
                   isOpen ? "top-3 -rotate-45" : "top-5"
                 }`}
@@ -168,7 +171,7 @@ export function Navbar() {
       </div>
 
       {/* Mobile Menu */}
-      <div 
+      <div
         className={`fixed inset-0 top-16 z-40 bg-background/98 backdrop-blur-xl transition-all duration-300 md:hidden ${
           isOpen ? "opacity-100 visible" : "opacity-0 invisible"
         }`}
@@ -185,12 +188,14 @@ export function Navbar() {
               >
                 <span className="flex items-center justify-between">
                   {link.label}
-                  <span className="text-sm text-muted-foreground">0{index + 1}</span>
+                  <span className="text-sm text-muted-foreground">
+                    0{index + 1}
+                  </span>
                 </span>
               </Link>
             ))}
           </div>
-          
+
           <div className="mt-auto border-t border-border pt-6">
             <p className="text-center text-sm text-muted-foreground">
               Menos tareas repetitivas, más margen operativo
@@ -199,5 +204,5 @@ export function Navbar() {
         </div>
       </div>
     </nav>
-  )
+  );
 }
